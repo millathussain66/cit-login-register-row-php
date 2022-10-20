@@ -69,7 +69,7 @@ $insert = "INSERT INTO users(`name`, `email`, `password`) VALUES ('$name','$emai
  if($query== true){
     
 
-    $_SESSION["success"]="Your Register Success Full";
+    $_SESSION["success"]="Your Register Successfull";
     header("location:index.php");
 
  }
