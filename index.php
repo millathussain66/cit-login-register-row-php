@@ -8,10 +8,6 @@ $select = "SELECT * FROM users";
 $query = mysqli_query($db_conn, $select);
 
 
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -25,10 +21,57 @@ $query = mysqli_query($db_conn, $select);
         Register Page
     </title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        .dd {
+    float: right;
+}
+    </style>
 </head>
 
 <body>
+
+
+
+    <nav class="bg-light p-4">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <a href="" class="h1">DashBord</a>
+                </div>
+                <div class="col-lg-6 ">
+                    <div class="dd">
+
+                        <a class="btn btn-outline-dark" href="">Login </a>
+
+
+                        <?php if (isset($_SESSION["success"]) && !empty($_SESSION["success"])) { ?>
+
+
+                        <a class="btn btn-outline-primery" href="">Logout</a>
+
+                        <?php }else{ ?>
+
+                        <a class="btn btn-outline-primery" href="">Register</a>
+
+                        <?php }?>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </nav>
+
+
+
+
+
+
     <div class="container">
         <div class="row ">
             <div class="col-md-6 m-auto mt-5">
@@ -54,11 +97,11 @@ $query = mysqli_query($db_conn, $select);
 
                                 <?php foreach ($query as $key => $item) { ?>
                                     <tr>
-                                        <td><?= $key+1 ?></td>
+                                        <td><?= $key + 1 ?></td>
                                         <td><?= $item['name'] ?></td>
                                         <td><?= $item['email'] ?></td>
                                         <td>
-                                            <a href="" class="btn btn-danger">Delete</a>
+                                            <a href="delete.php?id=<?= $item['id'] ?>" class="btn btn-danger">Delete</a>
                                         </td>
 
 
@@ -92,6 +135,21 @@ $query = mysqli_query($db_conn, $select);
                     timer: 3000
                 })
             <?php } ?>
+
+
+
+
+            <?php if (isset($_SESSION["delete"]) && !empty($_SESSION["delete"])) { ?>
+
+                Swal.fire({
+                    position: 'bottom-end',
+                    icon: 'error',
+                    title: '<?= $_SESSION["delete"]; ?>',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+
+            <?php } ?>
         </script>
 
 
@@ -101,4 +159,5 @@ $query = mysqli_query($db_conn, $select);
 
 <?php
 unset($_SESSION["success"]);
+unset($_SESSION["delete"]);
 ?>
