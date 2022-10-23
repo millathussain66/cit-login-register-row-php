@@ -1,4 +1,5 @@
-<?php session_start(); ?>
+<?php session_start(); 
+?>
 <?php
 
 require_once "db.php";
@@ -31,47 +32,6 @@ $query = mysqli_query($db_conn, $select);
 <body>
 
 
-
-    <nav class="bg-light p-4">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <a href="" class="h1">DashBord</a>
-                </div>
-                <div class="col-lg-6 ">
-                    <div class="dd">
-
-                        <a class="btn btn-outline-dark" href="">Login </a>
-
-
-                        <?php if (isset($_SESSION["success"]) && !empty($_SESSION["success"])) { ?>
-
-
-                        <a class="btn btn-outline-primery" href="">Logout</a>
-
-                        <?php }else{ ?>
-
-                        <a class="btn btn-outline-primery" href="">Register</a>
-
-                        <?php }?>
-
-
-                    </div>
-                </div>
-            </div>
-
-
-
-
-        </div>
-    </nav>
-
-
-
-
-
-
     <div class="container">
         <div class="row ">
             <div class="col-md-6 m-auto mt-5">
@@ -88,6 +48,7 @@ $query = mysqli_query($db_conn, $select);
                                     <th>#ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Image</th>
                                     <th>
                                         Actions
                                     </th>
@@ -100,6 +61,10 @@ $query = mysqli_query($db_conn, $select);
                                         <td><?= $key + 1 ?></td>
                                         <td><?= $item['name'] ?></td>
                                         <td><?= $item['email'] ?></td>
+                                        
+                                    <td>
+               <img class="img-thumbnail" width="100" src=" ./image/<?= $item['img'] ?> " alt="User Image">
+                                    </td>
                                         <td>
                                             <a href="delete.php?id=<?= $item['id'] ?>" class="btn btn-danger">Delete</a>
                                         </td>

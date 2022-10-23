@@ -8,22 +8,69 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 
 
-
 $make_hash_password = password_hash($password,PASSWORD_DEFAULT);
 
-// $img = $_FILES['img'];
-
-
-
 // Password Validations
-
-
 $uppercase =preg_match("@[A-Z]@",$password);
 $lowercase = preg_match("@[a-z]@",$password);
 $number = preg_match("@[0-9]@",$password);
 $specialChars = preg_match('@[^\w]@', $password);
 
+
+// image File
+
+        $image =  $_FILES['img'];
+        // Store Image in image Field
+        $after_explode = explode('.',$image['name']);
+
+        $extrantion = end($after_explode);
+
+        $support = array('jpg','png','jpeg');
+
+        if(in_array($extrantion,$support)){
+
+            if( $image['size'] <= 1024000 ){
+
+                echo "Mb Basi ";
+
+
+
+            }else{
+                
+            }
+
+
+
+
+
+
+
+            
+
+ 
+
+        }else{
+
+            $_SESSION["ex_error"]="Invalid Your File Extentions Supported Exenction Jpg,Png,Jpeg";
+            header("location:register.php");
+
+        }
+
+
+
+
+die();
+
+
+
+
+
+
+
+
 $slug =true;
+
+
 
 
 
@@ -60,9 +107,15 @@ if(empty($password)){
     header("location:register.php");
 }
 
+
+
+
+
+
+
 if($slug == true){
 
-$insert = "INSERT INTO users(`name`, `email`, `password`) VALUES ('$name','$email','$make_hash_password')";
+$insert = "INSERT INTO users(`name`, `email`, `password``) VALUES ('$name','$email','$make_hash_password')";
 
  $query =  mysqli_query($db_conn,$insert);
 

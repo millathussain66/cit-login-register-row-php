@@ -23,25 +23,10 @@ session_start();
         <div class="row ">
             <div class="col-md-6 m-auto mt-5">
 
-
-
-
-
-
-
-
-
                 <div class="card">
                     <div class="card-header bg-info">
                         <h2>Login Page</h2>
                     </div>
-
-
-
-
-
-
-
                     <div class="card-body">
                         <form action="register_post.php" method="post" enctype="multipart/form-data">
                             <div class="form-group">
@@ -77,10 +62,17 @@ session_start();
                                     <?php } ?>
                                 </small>
                             </div>
-                            <!-- <div class="form-group">
-                                <label for=""></label>
-                                <input type="file" class="form-control" name="img" id="">
-                            </div> -->
+
+                            <div class="form-group mt-2">
+                                <input class="form-control" type="file" name="img" onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+
+
+                            <div class="">
+                                <img class="img-fluid" id="blah" alt="your image" width="100" height="100" />
+
+                            </div>
+
                             <input class="btn btn-success mt-2" type="submit" value="Submit">
                     </div>
                     </form>
@@ -91,6 +83,20 @@ session_start();
     </div>
 
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        <?php if (isset($_SESSION["ex_error"]) && !empty($_SESSION["ex_error"])) { ?>
+
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '<?= $_SESSION["ex_error"]; ?>',
+                showConfirmButton: false,
+                timer: 3000
+            })
+        <?php } ?>
+    </script>
 </body>
 
 </html>
@@ -100,5 +106,6 @@ session_start();
 unset($_SESSION["name_err"]);
 unset($_SESSION["email_err"]);
 unset($_SESSION["pass_err"]);
+unset($_SESSION["ex_error"]);
 
 ?>
